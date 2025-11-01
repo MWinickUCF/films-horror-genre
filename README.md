@@ -6,6 +6,7 @@ A web-based horror movie catalog featuring 100 classic and modern horror films w
 
 - **100 Horror Movies**: Curated collection spanning from 1920s classics to modern horror
 - **Interactive Rating System**: Click stars to rate each movie from 1-5 stars
+- **Smart Recommendations**: Get personalized movie suggestions based on your ratings
 - **Local Storage Persistence**: Your ratings are automatically saved in your browser's local storage
 - **Search Functionality**: Search by movie title, director, or year
 - **Filter by Rating**: Filter movies by their star rating
@@ -44,6 +45,27 @@ A web-based horror movie catalog featuring 100 classic and modern horror films w
 - **View Your Ratings**: The "Your Ratings" stat shows how many movies you've rated
 - **Reset Ratings**: Click "Reset All Ratings" to restore all movies to their original ratings
 - Ratings are stored locally in your browser and won't sync across devices
+
+### Getting Recommendations
+
+The app features an intelligent recommendation system that suggests movies you haven't rated yet:
+
+1. **Start Rating**: Rate at least 2 movies to activate the recommendation engine
+2. **View Recommendations**: A "Recommended For You" section will appear above the main movie list
+3. **Smart Matching**: The system analyzes your ratings and suggests movies based on:
+   - **Director Preferences**: Movies by directors whose work you've rated highly
+   - **Era/Decade**: Films from time periods you enjoy
+   - **Critical Acclaim**: Movies with similar quality ratings to ones you like
+   - **Release Proximity**: Films released around the same time as your favorites
+   - **Style Patterns**: Classic vs. modern horror preferences
+4. **Rate Recommendations**: Click stars directly in the recommendation cards to rate them
+5. **Refresh**: Click "Refresh Recommendations" to regenerate suggestions
+6. **Auto-Update**: Recommendations automatically update as you rate more movies
+
+Each recommended movie shows:
+- Why it was recommended (based on your preferences)
+- A match score indicating how well it fits your taste
+- All standard movie details (title, year, director, current rating)
 
 ## Local Storage Details
 
@@ -131,6 +153,12 @@ this.STORAGE_KEY = 'yourCustomKey';
 - Event delegation for efficient star rating handlers
 - Real-time statistics calculation
 - Defensive error handling for JSON parsing
+- Multi-factor recommendation algorithm:
+  - Tracks original ratings vs. user ratings
+  - Scores unrated movies based on 6 different factors
+  - Considers director, decade, year, rating patterns, and era preferences
+  - Returns top 6 matches with explanatory reasons
+  - Auto-refreshes when user ratings change
 
 ## Troubleshooting
 
