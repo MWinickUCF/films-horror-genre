@@ -1,0 +1,702 @@
+[
+  {
+    "id": 1,
+    "title": "The Exorcist",
+    "year": 1973,
+    "rating": 5,
+    "director": "William Friedkin"
+  },
+  {
+    "id": 2,
+    "title": "The Shining",
+    "year": 1980,
+    "rating": 5,
+    "director": "Stanley Kubrick"
+  },
+  {
+    "id": 3,
+    "title": "Halloween",
+    "year": 1978,
+    "rating": 5,
+    "director": "John Carpenter"
+  },
+  {
+    "id": 4,
+    "title": "A Nightmare on Elm Street",
+    "year": 1984,
+    "rating": 4,
+    "director": "Wes Craven"
+  },
+  {
+    "id": 5,
+    "title": "The Texas Chain Saw Massacre",
+    "year": 1974,
+    "rating": 5,
+    "director": "Tobe Hooper"
+  },
+  {
+    "id": 6,
+    "title": "Psycho",
+    "year": 1960,
+    "rating": 5,
+    "director": "Alfred Hitchcock"
+  },
+  {
+    "id": 7,
+    "title": "Alien",
+    "year": 1979,
+    "rating": 5,
+    "director": "Ridley Scott"
+  },
+  {
+    "id": 8,
+    "title": "The Thing",
+    "year": 1982,
+    "rating": 5,
+    "director": "John Carpenter"
+  },
+  {
+    "id": 9,
+    "title": "Rosemary's Baby",
+    "year": 1968,
+    "rating": 5,
+    "director": "Roman Polanski"
+  },
+  {
+    "id": 10,
+    "title": "Night of the Living Dead",
+    "year": 1968,
+    "rating": 5,
+    "director": "George A. Romero"
+  },
+  {
+    "id": 11,
+    "title": "The Silence of the Lambs",
+    "year": 1991,
+    "rating": 5,
+    "director": "Jonathan Demme"
+  },
+  {
+    "id": 12,
+    "title": "Get Out",
+    "year": 2017,
+    "rating": 5,
+    "director": "Jordan Peele"
+  },
+  {
+    "id": 13,
+    "title": "Hereditary",
+    "year": 2018,
+    "rating": 4,
+    "director": "Ari Aster"
+  },
+  {
+    "id": 14,
+    "title": "The Conjuring",
+    "year": 2013,
+    "rating": 4,
+    "director": "James Wan"
+  },
+  {
+    "id": 15,
+    "title": "It Follows",
+    "year": 2014,
+    "rating": 4,
+    "director": "David Robert Mitchell"
+  },
+  {
+    "id": 16,
+    "title": "The Witch",
+    "year": 2015,
+    "rating": 4,
+    "director": "Robert Eggers"
+  },
+  {
+    "id": 17,
+    "title": "Scream",
+    "year": 1996,
+    "rating": 4,
+    "director": "Wes Craven"
+  },
+  {
+    "id": 18,
+    "title": "The Ring",
+    "year": 2002,
+    "rating": 4,
+    "director": "Gore Verbinski"
+  },
+  {
+    "id": 19,
+    "title": "28 Days Later",
+    "year": 2002,
+    "rating": 4,
+    "director": "Danny Boyle"
+  },
+  {
+    "id": 20,
+    "title": "The Descent",
+    "year": 2005,
+    "rating": 4,
+    "director": "Neil Marshall"
+  },
+  {
+    "id": 21,
+    "title": "Let the Right One In",
+    "year": 2008,
+    "rating": 4,
+    "director": "Tomas Alfredson"
+  },
+  {
+    "id": 22,
+    "title": "The Babadook",
+    "year": 2014,
+    "rating": 4,
+    "director": "Jennifer Kent"
+  },
+  {
+    "id": 23,
+    "title": "A Quiet Place",
+    "year": 2018,
+    "rating": 4,
+    "director": "John Krasinski"
+  },
+  {
+    "id": 24,
+    "title": "Midsommar",
+    "year": 2019,
+    "rating": 4,
+    "director": "Ari Aster"
+  },
+  {
+    "id": 25,
+    "title": "The Blair Witch Project",
+    "year": 1999,
+    "rating": 3,
+    "director": "Daniel Myrick, Eduardo Sánchez"
+  },
+  {
+    "id": 26,
+    "title": "Saw",
+    "year": 2004,
+    "rating": 3,
+    "director": "James Wan"
+  },
+  {
+    "id": 27,
+    "title": "Paranormal Activity",
+    "year": 2007,
+    "rating": 3,
+    "director": "Oren Peli"
+  },
+  {
+    "id": 28,
+    "title": "The Cabin in the Woods",
+    "year": 2011,
+    "rating": 4,
+    "director": "Drew Goddard"
+  },
+  {
+    "id": 29,
+    "title": "Sinister",
+    "year": 2012,
+    "rating": 4,
+    "director": "Scott Derrickson"
+  },
+  {
+    "id": 30,
+    "title": "Insidious",
+    "year": 2010,
+    "rating": 3,
+    "director": "James Wan"
+  },
+  {
+    "id": 31,
+    "title": "The Omen",
+    "year": 1976,
+    "rating": 4,
+    "director": "Richard Donner"
+  },
+  {
+    "id": 32,
+    "title": "Carrie",
+    "year": 1976,
+    "rating": 4,
+    "director": "Brian De Palma"
+  },
+  {
+    "id": 33,
+    "title": "The Fly",
+    "year": 1986,
+    "rating": 4,
+    "director": "David Cronenberg"
+  },
+  {
+    "id": 34,
+    "title": "Poltergeist",
+    "year": 1982,
+    "rating": 4,
+    "director": "Tobe Hooper"
+  },
+  {
+    "id": 35,
+    "title": "Evil Dead II",
+    "year": 1987,
+    "rating": 4,
+    "director": "Sam Raimi"
+  },
+  {
+    "id": 36,
+    "title": "Re-Animator",
+    "year": 1985,
+    "rating": 4,
+    "director": "Stuart Gordon"
+  },
+  {
+    "id": 37,
+    "title": "The Evil Dead",
+    "year": 1981,
+    "rating": 4,
+    "director": "Sam Raimi"
+  },
+  {
+    "id": 38,
+    "title": "Friday the 13th",
+    "year": 1980,
+    "rating": 3,
+    "director": "Sean S. Cunningham"
+  },
+  {
+    "id": 39,
+    "title": "Child's Play",
+    "year": 1988,
+    "rating": 3,
+    "director": "Tom Holland"
+  },
+  {
+    "id": 40,
+    "title": "Hellraiser",
+    "year": 1987,
+    "rating": 4,
+    "director": "Clive Barker"
+  },
+  {
+    "id": 41,
+    "title": "Dawn of the Dead",
+    "year": 1978,
+    "rating": 4,
+    "director": "George A. Romero"
+  },
+  {
+    "id": 42,
+    "title": "The Birds",
+    "year": 1963,
+    "rating": 4,
+    "director": "Alfred Hitchcock"
+  },
+  {
+    "id": 43,
+    "title": "Nosferatu",
+    "year": 1922,
+    "rating": 5,
+    "director": "F.W. Murnau"
+  },
+  {
+    "id": 44,
+    "title": "Dracula",
+    "year": 1931,
+    "rating": 4,
+    "director": "Tod Browning"
+  },
+  {
+    "id": 45,
+    "title": "Frankenstein",
+    "year": 1931,
+    "rating": 4,
+    "director": "James Whale"
+  },
+  {
+    "id": 46,
+    "title": "The Mummy",
+    "year": 1932,
+    "rating": 4,
+    "director": "Karl Freund"
+  },
+  {
+    "id": 47,
+    "title": "The Wolf Man",
+    "year": 1941,
+    "rating": 4,
+    "director": "George Waggner"
+  },
+  {
+    "id": 48,
+    "title": "Bride of Frankenstein",
+    "year": 1935,
+    "rating": 5,
+    "director": "James Whale"
+  },
+  {
+    "id": 49,
+    "title": "The Invisible Man",
+    "year": 1933,
+    "rating": 4,
+    "director": "James Whale"
+  },
+  {
+    "id": 50,
+    "title": "Creature from the Black Lagoon",
+    "year": 1954,
+    "rating": 4,
+    "director": "Jack Arnold"
+  },
+  {
+    "id": 51,
+    "title": "Invasion of the Body Snatchers",
+    "year": 1956,
+    "rating": 4,
+    "director": "Don Siegel"
+  },
+  {
+    "id": 52,
+    "title": "The Cabinet of Dr. Caligari",
+    "year": 1920,
+    "rating": 5,
+    "director": "Robert Wiene"
+  },
+  {
+    "id": 53,
+    "title": "Peeping Tom",
+    "year": 1960,
+    "rating": 4,
+    "director": "Michael Powell"
+  },
+  {
+    "id": 54,
+    "title": "Don't Look Now",
+    "year": 1973,
+    "rating": 4,
+    "director": "Nicolas Roeg"
+  },
+  {
+    "id": 55,
+    "title": "Suspiria",
+    "year": 1977,
+    "rating": 4,
+    "director": "Dario Argento"
+  },
+  {
+    "id": 56,
+    "title": "Deep Red",
+    "year": 1975,
+    "rating": 4,
+    "director": "Dario Argento"
+  },
+  {
+    "id": 57,
+    "title": "The Wicker Man",
+    "year": 1973,
+    "rating": 4,
+    "director": "Robin Hardy"
+  },
+  {
+    "id": 58,
+    "title": "Black Christmas",
+    "year": 1974,
+    "rating": 4,
+    "director": "Bob Clark"
+  },
+  {
+    "id": 59,
+    "title": "Eyes Without a Face",
+    "year": 1960,
+    "rating": 4,
+    "director": "Georges Franju"
+  },
+  {
+    "id": 60,
+    "title": "Onibaba",
+    "year": 1964,
+    "rating": 4,
+    "director": "Kaneto Shindō"
+  },
+  {
+    "id": 61,
+    "title": "Kwaidan",
+    "year": 1964,
+    "rating": 4,
+    "director": "Masaki Kobayashi"
+  },
+  {
+    "id": 62,
+    "title": "Ringu",
+    "year": 1998,
+    "rating": 4,
+    "director": "Hideo Nakata"
+  },
+  {
+    "id": 63,
+    "title": "Ju-On: The Grudge",
+    "year": 2002,
+    "rating": 4,
+    "director": "Takashi Shimizu"
+  },
+  {
+    "id": 64,
+    "title": "Audition",
+    "year": 1999,
+    "rating": 4,
+    "director": "Takashi Miike"
+  },
+  {
+    "id": 65,
+    "title": "Dark Water",
+    "year": 2002,
+    "rating": 3,
+    "director": "Hideo Nakata"
+  },
+  {
+    "id": 66,
+    "title": "Pulse",
+    "year": 2001,
+    "rating": 4,
+    "director": "Kiyoshi Kurosawa"
+  },
+  {
+    "id": 67,
+    "title": "Train to Busan",
+    "year": 2016,
+    "rating": 4,
+    "director": "Yeon Sang-ho"
+  },
+  {
+    "id": 68,
+    "title": "The Host",
+    "year": 2006,
+    "rating": 4,
+    "director": "Bong Joon-ho"
+  },
+  {
+    "id": 69,
+    "title": "I Saw the Devil",
+    "year": 2010,
+    "rating": 4,
+    "director": "Kim Jee-woon"
+  },
+  {
+    "id": 70,
+    "title": "A Tale of Two Sisters",
+    "year": 2003,
+    "rating": 4,
+    "director": "Kim Jee-woon"
+  },
+  {
+    "id": 71,
+    "title": "Thirst",
+    "year": 2009,
+    "rating": 4,
+    "director": "Park Chan-wook"
+  },
+  {
+    "id": 72,
+    "title": "The Lighthouse",
+    "year": 2019,
+    "rating": 4,
+    "director": "Robert Eggers"
+  },
+  {
+    "id": 73,
+    "title": "Us",
+    "year": 2019,
+    "rating": 4,
+    "director": "Jordan Peele"
+  },
+  {
+    "id": 74,
+    "title": "Nope",
+    "year": 2022,
+    "rating": 4,
+    "director": "Jordan Peele"
+  },
+  {
+    "id": 75,
+    "title": "X",
+    "year": 2022,
+    "rating": 4,
+    "director": "Ti West"
+  },
+  {
+    "id": 76,
+    "title": "Pearl",
+    "year": 2022,
+    "rating": 4,
+    "director": "Ti West"
+  },
+  {
+    "id": 77,
+    "title": "The Black Phone",
+    "year": 2021,
+    "rating": 3,
+    "director": "Scott Derrickson"
+  },
+  {
+    "id": 78,
+    "title": "Barbarian",
+    "year": 2022,
+    "rating": 4,
+    "director": "Zach Cregger"
+  },
+  {
+    "id": 79,
+    "title": "Smile",
+    "year": 2022,
+    "rating": 3,
+    "director": "Parker Finn"
+  },
+  {
+    "id": 80,
+    "title": "M3GAN",
+    "year": 2022,
+    "rating": 3,
+    "director": "Gerard Johnstone"
+  },
+  {
+    "id": 81,
+    "title": "Malignant",
+    "year": 2021,
+    "rating": 3,
+    "director": "James Wan"
+  },
+  {
+    "id": 82,
+    "title": "The Invisible Man",
+    "year": 2020,
+    "rating": 4,
+    "director": "Leigh Whannell"
+  },
+  {
+    "id": 83,
+    "title": "Saint Maud",
+    "year": 2019,
+    "rating": 4,
+    "director": "Rose Glass"
+  },
+  {
+    "id": 84,
+    "title": "Relic",
+    "year": 2020,
+    "rating": 3,
+    "director": "Natalie Erika James"
+  },
+  {
+    "id": 85,
+    "title": "His House",
+    "year": 2020,
+    "rating": 4,
+    "director": "Remi Weekes"
+  },
+  {
+    "id": 86,
+    "title": "The Night House",
+    "year": 2020,
+    "rating": 3,
+    "director": "David Bruckner"
+  },
+  {
+    "id": 87,
+    "title": "Candyman",
+    "year": 1992,
+    "rating": 4,
+    "director": "Bernard Rose"
+  },
+  {
+    "id": 88,
+    "title": "The Orphanage",
+    "year": 2007,
+    "rating": 4,
+    "director": "J.A. Bayona"
+  },
+  {
+    "id": 89,
+    "title": "REC",
+    "year": 2007,
+    "rating": 4,
+    "director": "Jaume Balagueró, Paco Plaza"
+  },
+  {
+    "id": 90,
+    "title": "The Devil's Backbone",
+    "year": 2001,
+    "rating": 4,
+    "director": "Guillermo del Toro"
+  },
+  {
+    "id": 91,
+    "title": "Pan's Labyrinth",
+    "year": 2006,
+    "rating": 5,
+    "director": "Guillermodel Toro"
+  },
+  {
+    "id": 92,
+    "title": "Cronos",
+    "year": 1993,
+    "rating": 4,
+    "director": "Guillermo del Toro"
+  },
+  {
+    "id": 93,
+    "title": "The Autopsy of Jane Doe",
+    "year": 2016,
+    "rating": 4,
+    "director": "André Øvredal"
+  },
+  {
+    "id": 94,
+    "title": "Tucker and Dale vs. Evil",
+    "year": 2010,
+    "rating": 4,
+    "director": "Eli Craig"
+  },
+  {
+    "id": 95,
+    "title": "What We Do in the Shadows",
+    "year": 2014,
+    "rating": 4,
+    "director": "Jemaine Clement, Taika Waititi"
+  },
+  {
+    "id": 96,
+    "title": "Shaun of the Dead",
+    "year": 2004,
+    "rating": 4,
+    "director": "Edgar Wright"
+  },
+  {
+    "id": 97,
+    "title": "Army of Darkness",
+    "year": 1992,
+    "rating": 4,
+    "director": "Sam Raimi"
+  },
+  {
+    "id": 98,
+    "title": "An American Werewolf in London",
+    "year": 1981,
+    "rating": 4,
+    "director": "John Landis"
+  },
+  {
+    "id": 99,
+    "title": "The Lost Boys",
+    "year": 1987,
+    "rating": 4,
+    "director": "Joel Schumacher"
+  },
+  {
+    "id": 100,
+    "title": "Fright Night",
+    "year": 1985,
+    "rating": 4,
+    "director": "Tom Holland"
+  }
+]
