@@ -5,12 +5,14 @@ class HorrorMoviesApp {
         this.filteredMovies = [];
         this.originalRatings = {}; // Store original ratings to identify user changes
         this.STORAGE_KEY = 'horrorMoviesRatings';
+        this.WATCHED_STORAGE_KEY = 'horrorMoviesWatched';
         this.init();
     }
 
     async init() {
         await this.loadMovies();
         this.loadRatingsFromStorage();
+        this.loadWatchedStatusFromStorage();
         this.setupEventListeners();
         this.renderMovies();
         this.updateStats();
@@ -23,9 +25,10 @@ class HorrorMoviesApp {
             this.movies = await response.json();
             this.filteredMovies = [...this.movies];
 
-            // Store original ratings
+            // Store original ratings and initialize watched status
             this.movies.forEach(movie => {
                 this.originalRatings[movie.id] = movie.rating;
+                movie.watched = false; // All movies unwatched by default
             });
         } catch (error) {
             console.error('Error loading movies:', error);
@@ -58,6 +61,51 @@ class HorrorMoviesApp {
         });
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(ratings));
         console.log('Ratings saved to local storage');
+    }
+
+    loadWatchedStatusFromStorage() {
+        const stored = localStorage.getItem(this.WATCHED_STORAGE_KEY);
+        if (stored) {
+            try {
+                const watchedStatus = JSON.parse(stored);
+                // Apply stored watched status to movies
+                this.movies.forEach(movie => {
+                    if (watchedStatus[movie.id] !== undefined) {
+                        movie.watched = watchedStatus[movie.id];
+                    }
+                });
+                console.log('Watched status loaded from local storage');
+            } catch (error) {
+                console.error('Error parsing stored watched status:', error);
+            }
+        }
+    }
+
+    saveWatchedStatusToStorage() {
+        const watchedStatus = {};
+        this.movies.forEach(movie => {
+            watchedStatus[movie.id] = movie.watched;
+        });
+        localStorage.setItem(this.WATCHED_STORAGE_KEY, JSON.stringify(watchedStatus));
+        console.log('Watched status saved to local storage');
+    }
+
+    toggleWatchedStatus(movieId) {
+        const movie = this.movies.find(m => m.id === movieId);
+        if (movie) {
+            movie.watched = !movie.watched;
+
+            // If marking as unwatched, reset rating to original
+            if (!movie.watched) {
+                movie.rating = this.originalRatings[movieId];
+                this.saveRatingsToStorage();
+            }
+
+            this.saveWatchedStatusToStorage();
+            this.renderMovies();
+            this.updateStats();
+            this.updateRecommendations();
+        }
     }
 
     setupEventListeners() {
@@ -109,37 +157,54 @@ class HorrorMoviesApp {
         }
 
         grid.innerHTML = this.filteredMovies.map(movie => `
-            <div class="movie-card">
+            <div class="movie-card ${movie.watched ? 'watched' : 'unwatched'}">
+                ${!movie.watched ? '<div class="unwatched-badge">📺 UNWATCHED</div>' : ''}
                 <div class="movie-title">${movie.title}</div>
                 <div class="movie-info">
                     <div class="movie-year">Year: ${movie.year}</div>
                     <div class="movie-director">Director: ${movie.director}</div>
                 </div>
                 <div class="rating-container">
-                    <div class="stars" data-movie-id="${movie.id}">
-                        ${this.renderStars(movie.id, movie.rating)}
+                    <div class="stars ${!movie.watched ? 'disabled' : ''}" data-movie-id="${movie.id}">
+                        ${this.renderStars(movie.id, movie.rating, movie.watched)}
                     </div>
-                    <span class="rating-text">${movie.rating}/5</span>
+                    <span class="rating-text">${movie.watched ? movie.rating + '/5' : '-/5'}</span>
                 </div>
+                <button class="watched-toggle-btn" data-movie-id="${movie.id}">
+                    ${movie.watched ? '✓ Watched' : 'Mark as Watched'}
+                </button>
             </div>
         `).join('');
 
-        // Add click handlers to stars
+        // Add click handlers to stars (only for watched movies)
         document.querySelectorAll('.star').forEach(star => {
             star.addEventListener('click', (e) => {
                 const movieId = parseInt(e.target.dataset.movieId);
-                const rating = parseInt(e.target.dataset.rating);
-                this.updateRating(movieId, rating);
+                const movie = this.movies.find(m => m.id === movieId);
+
+                // Only allow rating if movie is watched
+                if (movie && movie.watched) {
+                    const rating = parseInt(e.target.dataset.rating);
+                    this.updateRating(movieId, rating);
+                }
+            });
+        });
+
+        // Add click handlers to watched toggle buttons
+        document.querySelectorAll('.watched-toggle-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const movieId = parseInt(e.target.dataset.movieId);
+                this.toggleWatchedStatus(movieId);
             });
         });
 
         this.updateStats();
     }
 
-    renderStars(movieId, currentRating) {
+    renderStars(movieId, currentRating, watched) {
         let stars = '';
         for (let i = 1; i <= 5; i++) {
-            const filled = i <= currentRating ? 'filled' : '';
+            const filled = watched && i <= currentRating ? 'filled' : '';
             stars += `<span class="star ${filled}" data-movie-id="${movieId}" data-rating="${i}">★</span>`;
         }
         return stars;
@@ -147,22 +212,25 @@ class HorrorMoviesApp {
 
     updateRating(movieId, newRating) {
         const movie = this.movies.find(m => m.id === movieId);
-        if (movie) {
+        if (movie && movie.watched) {  // Only allow rating if watched
             movie.rating = newRating;
             this.saveRatingsToStorage();
 
             // Update the specific movie card instead of re-rendering everything
             const starsContainer = document.querySelector(`[data-movie-id="${movieId}"]`);
             if (starsContainer) {
-                starsContainer.innerHTML = this.renderStars(movieId, newRating);
+                starsContainer.innerHTML = this.renderStars(movieId, newRating, movie.watched);
                 starsContainer.nextElementSibling.textContent = `${newRating}/5`;
 
                 // Re-attach click handlers to the new stars
                 starsContainer.querySelectorAll('.star').forEach(star => {
                     star.addEventListener('click', (e) => {
                         const mid = parseInt(e.target.dataset.movieId);
-                        const rating = parseInt(e.target.dataset.rating);
-                        this.updateRating(mid, rating);
+                        const m = this.movies.find(movie => movie.id === mid);
+                        if (m && m.watched) {
+                            const rating = parseInt(e.target.dataset.rating);
+                            this.updateRating(mid, rating);
+                        }
                     });
                 });
             }
@@ -174,20 +242,25 @@ class HorrorMoviesApp {
 
     updateStats() {
         const totalMovies = this.movies.length;
-        const avgRating = (this.movies.reduce((sum, m) => sum + m.rating, 0) / totalMovies).toFixed(1);
+        const watchedMovies = this.movies.filter(m => m.watched);
+        const watchedCount = watchedMovies.length;
+        const unwatchedCount = totalMovies - watchedCount;
 
-        // Count movies that have been rated (changed from default)
-        const storedRatings = localStorage.getItem(this.STORAGE_KEY);
-        const ratedCount = storedRatings ? Object.keys(JSON.parse(storedRatings)).length : 0;
+        // Calculate average rating only for watched movies
+        const avgRating = watchedCount > 0
+            ? (watchedMovies.reduce((sum, m) => sum + m.rating, 0) / watchedCount).toFixed(1)
+            : '0.0';
 
         document.getElementById('totalMovies').textContent = totalMovies;
+        document.getElementById('watchedMovies').textContent = watchedCount;
+        document.getElementById('unwatchedMovies').textContent = unwatchedCount;
         document.getElementById('avgRating').textContent = avgRating;
-        document.getElementById('ratedMovies').textContent = ratedCount;
     }
 
     async resetRatings() {
         // Clear local storage
         localStorage.removeItem(this.STORAGE_KEY);
+        localStorage.removeItem(this.WATCHED_STORAGE_KEY);
 
         // Reload original ratings from JSON
         await this.loadMovies();
@@ -201,25 +274,17 @@ class HorrorMoviesApp {
         this.updateStats();
         this.updateRecommendations();
 
-        alert('All ratings have been reset to their original values!');
+        alert('All ratings and watched status have been reset!');
     }
 
     getUserRatedMovies() {
-        // Get movies that have been rated by the user (different from original rating)
-        const storedRatings = localStorage.getItem(this.STORAGE_KEY);
-        if (!storedRatings) return [];
-
-        const ratings = JSON.parse(storedRatings);
-        return this.movies.filter(movie => ratings[movie.id] !== undefined);
+        // Get movies that have been watched by the user
+        return this.movies.filter(movie => movie.watched);
     }
 
-    getUnratedMovies() {
-        // Get movies that haven't been rated by the user
-        const storedRatings = localStorage.getItem(this.STORAGE_KEY);
-        if (!storedRatings) return [...this.movies];
-
-        const ratings = JSON.parse(storedRatings);
-        return this.movies.filter(movie => ratings[movie.id] === undefined);
+    getUnwatchedMovies() {
+        // Get movies that haven't been watched by the user
+        return this.movies.filter(movie => !movie.watched);
     }
 
     getDecade(year) {
@@ -227,25 +292,25 @@ class HorrorMoviesApp {
     }
 
     calculateRecommendations() {
-        const userRatedMovies = this.getUserRatedMovies();
-        const unratedMovies = this.getUnratedMovies();
+        const watchedMovies = this.getUserRatedMovies();
+        const unwatchedMovies = this.getUnwatchedMovies();
 
-        // Need at least 2 ratings to generate recommendations
-        if (userRatedMovies.length < 2 || unratedMovies.length === 0) {
+        // Need at least 2 watched movies to generate recommendations
+        if (watchedMovies.length < 2 || unwatchedMovies.length === 0) {
             return [];
         }
 
-        // Get highly rated movies (4 or 5 stars) from user ratings
-        const highlyRated = userRatedMovies.filter(m => m.rating >= 4);
+        // Get highly rated movies (4 or 5 stars) from watched movies
+        const highlyRated = watchedMovies.filter(m => m.rating >= 4);
 
-        // If no highly rated movies, use all user-rated movies
-        const referenceMovies = highlyRated.length > 0 ? highlyRated : userRatedMovies;
+        // If no highly rated movies, use all watched movies
+        const referenceMovies = highlyRated.length > 0 ? highlyRated : watchedMovies;
 
-        // Calculate average rating of user's rated movies
-        const avgUserRating = userRatedMovies.reduce((sum, m) => sum + m.rating, 0) / userRatedMovies.length;
+        // Calculate average rating of user's watched movies
+        const avgUserRating = watchedMovies.reduce((sum, m) => sum + m.rating, 0) / watchedMovies.length;
 
-        // Score each unrated movie
-        const scoredMovies = unratedMovies.map(movie => {
+        // Score each unwatched movie
+        const scoredMovies = unwatchedMovies.map(movie => {
             let score = 0;
             const reasons = [];
 
@@ -327,22 +392,26 @@ class HorrorMoviesApp {
         section.classList.remove('hidden');
 
         grid.innerHTML = recommendations.map(({ movie, score, reasons }) => `
-            <div class="recommendation-card">
+            <div class="recommendation-card ${movie.watched ? 'watched' : 'unwatched'}">
+                ${!movie.watched ? '<div class="unwatched-badge">📺 UNWATCHED</div>' : ''}
                 <div class="movie-title">${movie.title}</div>
                 <div class="movie-info">
                     <div class="movie-year">Year: ${movie.year}</div>
                     <div class="movie-director">Director: ${movie.director}</div>
                 </div>
                 <div class="rating-container">
-                    <div class="stars" data-movie-id="${movie.id}">
-                        ${this.renderStars(movie.id, movie.rating)}
+                    <div class="stars ${!movie.watched ? 'disabled' : ''}" data-movie-id="${movie.id}">
+                        ${this.renderStars(movie.id, movie.rating, movie.watched)}
                     </div>
-                    <span class="rating-text">${movie.rating}/5</span>
+                    <span class="rating-text">${movie.watched ? movie.rating + '/5' : '-/5'}</span>
                 </div>
                 <div class="recommendation-reason">
                     <strong>Why:</strong> ${reasons.slice(0, 2).join(', ')}
                     <span class="recommendation-score">Match: ${score}%</span>
                 </div>
+                <button class="watched-toggle-btn" data-movie-id="${movie.id}">
+                    ${movie.watched ? '✓ Watched' : 'Mark as Watched'}
+                </button>
             </div>
         `).join('');
 
@@ -350,8 +419,21 @@ class HorrorMoviesApp {
         grid.querySelectorAll('.star').forEach(star => {
             star.addEventListener('click', (e) => {
                 const movieId = parseInt(e.target.dataset.movieId);
-                const rating = parseInt(e.target.dataset.rating);
-                this.updateRating(movieId, rating);
+                const movie = this.movies.find(m => m.id === movieId);
+
+                // Only allow rating if movie is watched
+                if (movie && movie.watched) {
+                    const rating = parseInt(e.target.dataset.rating);
+                    this.updateRating(movieId, rating);
+                }
+            });
+        });
+
+        // Add click handlers to watched toggle buttons in recommendations
+        grid.querySelectorAll('.watched-toggle-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const movieId = parseInt(e.target.dataset.movieId);
+                this.toggleWatchedStatus(movieId);
             });
         });
     }
